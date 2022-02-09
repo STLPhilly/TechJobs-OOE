@@ -16,6 +16,8 @@ public class JobTest {
     Job emptyJob2;
     Job fullJob1;
     Job fullJob2;
+    Job multiTestJob;
+    Job emptyStringsJob;
     @Before
     public void createObject(){
     emptyJob1 = new Job();
@@ -24,7 +26,12 @@ public class JobTest {
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
     fullJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        System.out.println("I go in like this: " + fullJob2);
+    multiTestJob = new Job("", new Employer("ACME"), new Location(""),
+                new PositionType("Quality control"), new CoreCompetency("Persistence"));
+    emptyStringsJob = new Job("", new Employer(""), new Location(""),
+                new PositionType(""), new CoreCompetency(""));
+
+        System.out.println("I go in like this: " + multiTestJob);
     }
 
     @Test
@@ -65,35 +72,35 @@ public class JobTest {
     }
 
     @Test
-    public void testToStringMethod(){
+    public void testToStringMethodMulti(){
         createObject();
-        //create multiple test for each test field
-        // test for \n before
-        String slashn = "\n";
-//        assertTrue(firstJob.toString().indexOf(slashn) != -1);
-        System.out.println("Testing 74 " + fullJob2.toString());
-//        assertTrue(fullJob2.toString().contains(slashn));
-// line 74 prints out an iteration of one line
-        // test that each field is GETting the correct data for each field
+        String expected;
+        expected ="\n" +
+                "ID: " + multiTestJob.getId()  +
+                "\nName: Data not available" +
+                "\nEmployer: ACME" +
+                "\nLocation: Data not available" +
+                "\nPosition Type: Quality control" +
+                "\nCore Competency: Persistence" +
+                "\n";
 
-
-        // check for "data not available" instead of empty string
-//        createObject();
-
-
-
-        //Test \n and after
-
-        // Test name to be ""
-        // firstjob.getname = null ??
-        System.out.println("I come out like this: "+ fullJob2);
-        System.out.println(fullJob2.getName());
-        System.out.println(fullJob2.getEmployer().toString());
-        assertFalse(fullJob2.getEmployer().toString() == "");
-        assertFalse(fullJob2.getLocation().toString() == "");
-        assertFalse(fullJob2.getPositionType().toString() == "");
-        assertFalse(fullJob2.getCoreCompetency().toString() == "");
-
+        //When passed a Job object, it should return a string that contains a blank line before and after the job information.
+        //The string should contain a label for each field, followed by the data stored in that field. Each field should be on its own line.
+        //If a field is empty, the method should add, “Data not available” after the label.
+        //     multiTestJob = new Job("", new Employer("ACME"), new Location(""),
+        //                new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        assertEquals(expected,multiTestJob.toString());
     }
+
+    @Test
+    public void testToStringMethodNoJob(){
+        createObject();
+        String expected;
+        //(Bonus) If a Job object ONLY contains data for the id field, the method should return, “OOPS! This job does not seem to exist.”
+        expected ="\n" +
+                "OOPS! This job does not seem to exist." +
+                "\n";
+        assertEquals(expected,emptyStringsJob.toString());
 }
+};
 

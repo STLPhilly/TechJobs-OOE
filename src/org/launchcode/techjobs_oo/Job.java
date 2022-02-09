@@ -1,7 +1,5 @@
 package org.launchcode.techjobs_oo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class Job {
@@ -96,72 +94,39 @@ public class Job {
     public String toString(){
 
         String result = "";
-        String test = "";
-        String noJob = " OOPS! This job does not seem to exist.";
+        String noJob = "OOPS! This job does not seem to exist.\n";
         String noData = " Data not available";
-        String strId = Integer.toString(id);
-//        result = "\nID:" + id
-//                + "\nName:" + name
-//                + "\nEmployer:" + employer
-//                + "\nLocation:" + location
-//                + "\nPosition type:" + positionType
-//                + "\nCore Competency:" + coreCompetency;
-
-        // assign a variable for each value.
-        String id1 = strId;
-        String name1 = this.getName();
-        String employer1 = this.getEmployer().getValue();
-        String location1 = this.getLocation().getValue();
-        String positiontype1 = this.getPositionType().getValue();
-        String coreCompetency1 = this.getCoreCompetency().getValue();
-
-        // Makes a hashmap so we can iterate through each k/v pair
-        HashMap<String, String> jobFields = new HashMap<>();
-        jobFields.put("ID", strId);
-        jobFields.put("Name", name);
-        jobFields.put("Employer", this.getEmployer().getValue());
-        jobFields.put("Location", this.getLocation().getValue());
-        jobFields.put("Position type", this.getPositionType().getValue());
-        jobFields.put("Core Competency", this.getCoreCompetency().getValue());
 
         // if everything but ID is empty, it doesn't exist. Exit logic.
         if(this.name == "" && this.employer.getValue() == "" && this.coreCompetency.getValue() == "" && this.positionType.getValue() == "" && this.location.getValue() == ""){
-            System.out.println("\n"+ noJob);
+            result = "\n"+ noJob;
         } else {
-            System.out.println( "\n");
-
-
-            for (String field : jobFields.keySet()) {
-                String value = jobFields.get(field);
-
-                // check if a value is empty, and replace it with "no data"
-                if (value == "") {
-                    test = field + ": " + noData;
-                    System.out.println(test);
-                    return(test);
-                } else {
-                    test = field + ": " + value;
-                    System.out.println(test);
-                    return(test);
-                }
-                ArrayList<String> testResult = new ArrayList<>();
+            if (name.equals("")) {
+                name = noData;
             }
+            System.out.println(employer.getValue());
+            if (employer.getValue().equals("") || employer.getValue() == null) {
+                employer.setValue(noData);
 
+            }
+            if (location.getValue().equals("") || location.getValue() == null) {
+                location.setValue(noData);
+            }
+            if (coreCompetency.getValue().equals("") || coreCompetency.getValue() == null) {
+                coreCompetency.setValue(noData);
+            }
+            if (positionType.getValue().equals("") || positionType.getValue() == null) {
+                positionType.setValue(noData);
+            }
+            result = "\nID: " + id
+                    + "\nName:" + name
+                    + "\nEmployer: " + employer
+                    + "\nLocation:" + location
+                    + "\nPosition Type: " + positionType
+                    + "\nCore Competency: " + coreCompetency
+                    +"\n";
 
-//            if (this.name == "" && this.employer.getValue() == "" && this.coreCompetency.getValue() == "" && this.positionType.getValue() == "" && this.location.getValue() == "") {
-//                System.out.println("\n" + noJob);
-//            }
         }
-//        if(name.length() != 0){
-//            //TODO Figure out how to iterate through constructor values
-//            setName(noData);
-//            System.out.println(name.length());
-//            System.out.println("");
-//            return result;
-//        } else {
-//            System.out.println("else" + name.length());
-//            return noJob;
-//        }
-        return test;
+        return result;
     }
-}
+};
