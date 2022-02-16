@@ -38,6 +38,7 @@ public class JobTest {
     public void testSettingJobId() {
         createObject();
         assertFalse(emptyJob1.getId() == emptyJob2.getId());
+        assertFalse(emptyJob1.equals(emptyJob2));
     }
 
     @Test
@@ -68,12 +69,12 @@ public class JobTest {
         Job job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertFalse(job1 == job2);
+        assertFalse(job1.equals(job2));
+
     }
 
     @Test
     public void testToStringMethodMulti(){
-        createObject();
         String expected;
         expected ="\n" +
                 "ID: " + multiTestJob.getId()  +
@@ -94,7 +95,6 @@ public class JobTest {
 
     @Test
     public void testToStringMethodNoJob(){
-        createObject();
         String expected;
         //(Bonus) If a Job object ONLY contains data for the id field, the method should return, “OOPS! This job does not seem to exist.”
         expected ="\n" +
@@ -103,4 +103,3 @@ public class JobTest {
         assertEquals(expected,emptyStringsJob.toString());
 }
 };
-

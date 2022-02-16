@@ -95,38 +95,52 @@ public class Job {
 
         String result = "";
         String noJob = "OOPS! This job does not seem to exist.\n";
-        String noData = " Data not available";
+        String noData = "Data not available";
 
         // if everything but ID is empty, it doesn't exist. Exit logic.
         if(this.name == "" && this.employer.getValue() == "" && this.coreCompetency.getValue() == "" && this.positionType.getValue() == "" && this.location.getValue() == ""){
             result = "\n"+ noJob;
         } else {
+//
+//            result = "\nID: " + id
+//                    + "\nName:" + name
+//                    + "\nEmployer: " + employer
+//                    + "\nLocation:" + location
+//                    + "\nPosition Type: " + positionType
+//                    + "\nCore Competency: " + coreCompetency
+//                    + "\n";
+
+            String newName = "\nName: " + name;
             if (name.equals("")) {
-                name = noData;
+                newName = "\nName: " + noData;
             }
-            System.out.println(employer.getValue());
+
+            String newEmployer = "\nEmployer: " + employer.getValue();
             if (employer.getValue().equals("") || employer.getValue() == null) {
-                employer.setValue(noData);
+                newEmployer = "\nEmployer: " + noData;
 
             }
+            String newLocation = "\nLocation: " + location.getValue();
             if (location.getValue().equals("") || location.getValue() == null) {
-                location.setValue(noData);
+                newLocation = "\nLocation: " + noData;
             }
-            if (coreCompetency.getValue().equals("") || coreCompetency.getValue() == null) {
-                coreCompetency.setValue(noData);
-            }
+            String newPositionType = "\nPosition Type: " + positionType.getValue();
             if (positionType.getValue().equals("") || positionType.getValue() == null) {
-                positionType.setValue(noData);
+                newPositionType = "\nPosition Type: " + noData;
+            }
+            String newCoreCompetency = "\nCore Competency: " + coreCompetency.getValue();
+            if (coreCompetency.getValue().equals("") || coreCompetency.getValue() == null) {
+                newCoreCompetency = "\nCore Competency: " + noData;
             }
             result = "\nID: " + id
-                    + "\nName:" + name
-                    + "\nEmployer: " + employer
-                    + "\nLocation:" + location
-                    + "\nPosition Type: " + positionType
-                    + "\nCore Competency: " + coreCompetency
-                    +"\n";
+                    + newName
+                    + newEmployer
+                    + newLocation
+                    + newPositionType
+                    + newCoreCompetency
+                    + "\n";
 
         }
         return result;
     }
-};
+}
